@@ -79,6 +79,9 @@ Here is an example of a traffic sign image before and after grayscaling.
 
 As a last step, I normalized the image data because we want values during the optimization not to get too big or to small. Ideally, they should have zero means and equal variance. 
 
+*Update 07/05*
+
+I've now added data augmentation by enhancing existing training images. I've added more images by flipping and rotating (randome degrees between -30 degrees and 30 degrees) the original X_train image set.
 
 ####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
@@ -232,6 +235,70 @@ Sixth Image: Stop
 | .00	      			| Yield                                 		|
 | -.01				    | Keep right                       		        |
 
+*Update 7/5*
+
+After doing data augumentation, the test accuracy didn't improve much (in fact, it stayed flat at 0.932). But the softmax probability has got a significant bump. Here're the numbers after doing data augmentation:
+
+First Image: Speed Limit 30km/h
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| .30        			| 30km/h       									| 
+| .15     				| 50km/h 										|
+| .02					| 20km/h										|
+| .01	      			| 80km/h    					 				|
+| .00				    | 70km/h              							|
+
+Second Image: Speed Limit 80km/h
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| .37         			| 30km/h       									| 
+| .20    				| 20km/h 										|
+| .04					| 70km/h										|
+| .01	      			| 50km/h    					 				|
+| -.02		    	    | Bicycles crossing                        		|
+
+
+Third Image: Speed Limit 120km/h
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| .22         			| 20km/h       		    						| 
+| .14   				| 30km/h 										|
+| .10					| 120km/h										|
+| .09      		    	| 70km/h    					 				|
+| .07				    | Keep left             		                |
+
+Fourth Image: Children crossing
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| .24        			| Children crossing       						| 
+| .18     				| Bicycles crossing 			        		|
+| .07					| Dangerous curve to the right					|
+| .06	      			| Right-of-way at the next intersection    	    |
+| .05				    | Road narrows on the right             		|
+
+Fifth Image: Turn right ahead
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| .14        			| Turn right ahead       						| 
+| .07     				| Keep left                    					|
+| .02					| Double curve     								|
+| .01	      			| Go straight or left                   		|
+| .00				    | Speed limit (50km/h)                          |
+
+Sixth Image: Stop
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| .26         			| Stop                     						| 
+| .08     				| Turn right ahead                     			|
+| .07					| Speed limit (30km/h)     						|
+| .05	      			| Yield                                 		|
+| .02				    | Bumpy road                       		        |
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 ####1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
